@@ -1,0 +1,62 @@
+{% extends 'restaurant/base.html' %}
+
+{% block content %}
+<div class="confirmation-page">
+    <h2>Order Confirmed!</h2>
+
+    <div class="confirmation-message">
+        <p>Thank you for your order, <strong>{{ customer_name }}</strong>!</p>
+    </div>
+
+    <section class="order-details">
+        <h3>Order Summary</h3>
+
+        <div class="items-ordered">
+            <h4>Items Ordered:</h4>
+            <ul>
+                {% for item in ordered_items %}
+                <li>{{ item.name }} - ${{ item.price }}</li>
+                {% endfor %}
+            </ul>
+
+            {% if pizza_toppings_ordered %}
+            <h4>Pizza Toppings:</h4>
+            <ul>
+                {% for topping in pizza_toppings_ordered %}
+                <li>{{ topping.name }} - ${{ topping.price }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+
+        <div class="order-total">
+            <h4>Total: ${{ total_price }}</h4>
+        </div>
+
+        {% if special_instructions %}
+        <div class="special-instructions">
+            <h4>Special Instructions:</h4>
+            <p>{{ special_instructions }}</p>
+        </div>
+        {% endif %}
+    </section>
+
+    <section class="customer-details">
+        <h3>Customer Information</h3>
+        <p><strong>Name:</strong> {{ customer_name }}</p>
+        <p><strong>Phone:</strong> {{ customer_phone }}</p>
+        <p><strong>Email:</strong> {{ customer_email }}</p>
+    </section>
+
+    <section class="pickup-time">
+        <h3>Pickup Time</h3>
+        <p class="ready-time">Your order will be ready at: <strong>{{ ready_time }}</strong></p>
+        <p>(Approximately {{ minutes_until_ready }} minutes from now)</p>
+    </section>
+
+    <div class="back-link">
+        <a href="{% url 'main' %}">Return to Home</a>
+        <a href="{% url 'order' %}">Place Another Order</a>
+    </div>
+</div>
+{% endblock %}

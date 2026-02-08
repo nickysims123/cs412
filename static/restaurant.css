@@ -1,0 +1,206 @@
+body {
+    font-family: Georgia, serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #faf8f5;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #8b0000;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin-bottom: 10px;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 16px;
+    margin: 0 5px;
+    border: 1px solid #fff;
+    border-radius: 4px;
+}
+
+nav a:hover {
+    background-color: #fff;
+    color: #8b0000;
+}
+
+main {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+h2, h3 {
+    color: #8b0000;
+}
+
+.hours-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0;
+}
+
+.hours-table td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+.image-container {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 15px 0;
+}
+
+.image-container img {
+    max-width: 280px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.order-button, .submit-button, .back-link a {
+    display: inline-block;
+    background-color: #8b0000;
+    color: #fff;
+    padding: 12px 24px;
+    text-decoration: none;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.order-button:hover, .submit-button:hover, .back-link a:hover {
+    background-color: #a00000;
+}
+
+.menu-item {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    background-color: #faf8f5;
+}
+
+.menu-item label {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.item-description {
+    color: #666;
+    font-style: italic;
+    margin: 5px 0 0 20px;
+}
+
+.toppings {
+    margin: 10px 0 0 20px;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px dashed #8b0000;
+}
+
+.toppings label {
+    display: block;
+    margin: 5px 0;
+    font-weight: normal;
+}
+
+.special {
+    background-color: #fff8dc;
+    border-color: #daa520;
+}
+
+.form-group {
+    margin-bottom: 12px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 4px;
+    font-weight: bold;
+}
+
+.form-group input, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1em;
+    box-sizing: border-box;
+}
+
+.confirmation-message {
+    text-align: center;
+    padding: 15px;
+    background-color: #f0fff0;
+    border: 2px solid #228b22;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.order-details, .customer-details, .pickup-time {
+    padding: 15px;
+    background-color: #faf8f5;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+.items-ordered ul {
+    list-style: none;
+    padding-left: 10px;
+}
+
+.items-ordered li {
+    padding: 5px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.order-total {
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 2px solid #8b0000;
+    font-weight: bold;
+}
+
+.pickup-time {
+    text-align: center;
+    background-color: #fff8dc;
+    border: 1px solid #daa520;
+}
+
+.back-link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 15px;
+    margin-top: 30px;
+}
+
+.submit-section {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.cta {
+    text-align: center;
+    margin-top: 20px;
+}

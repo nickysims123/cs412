@@ -1,0 +1,109 @@
+{% extends 'restaurant/base.html' %}
+
+
+{% block content %}
+<div class="order-page">
+    <h2>Place Your Order</h2>
+
+    <form action="{% url 'confirmation' %}" method="POST">
+        {% csrf_token %}
+
+        <section class="menu-section">
+            <h3>Menu Items</h3>
+
+            <div class="menu-item">
+                <label>
+                    <input type="checkbox" name="burger" value="1">
+                    Classic Burger - $12.99
+                </label>
+                <p class="item-description">Juicy beef patty with lettuce, tomato, and our special sauce</p>
+            </div>
+
+            <div class="menu-item pizza-section">
+                <label>
+                    <input type="checkbox" name="pizza" value="1" id="pizza-checkbox">
+                    Margherita Pizza - $15.99
+                </label>
+                <p class="item-description">Fresh mozzarella, tomatoes, and basil on our house-made crust</p>
+
+                <div class="toppings">
+                    <p><strong>Add Toppings:</strong></p>
+                    <label>
+                        <input type="checkbox" name="pepperoni" value="1">
+                        Pepperoni (+$1.50)
+                    </label>
+                    <label>
+                        <input type="checkbox" name="mushrooms" value="1">
+                        Mushrooms (+$1.00)
+                    </label>
+                    <label>
+                        <input type="checkbox" name="olives" value="1">
+                        Olives (+$1.00)
+                    </label>
+                    <label>
+                        <input type="checkbox" name="extra_cheese" value="1">
+                        Extra Cheese (+$1.50)
+                    </label>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <label>
+                    <input type="checkbox" name="salad" value="1">
+                    Caesar Salad - $9.99
+                </label>
+                <p class="item-description">Crisp romaine lettuce, parmesan cheese, croutons, and Caesar dressing</p>
+            </div>
+
+            <div class="menu-item">
+                <label>
+                    <input type="checkbox" name="pasta" value="1">
+                    Spaghetti Carbonara - $14.99
+                </label>
+                <p class="item-description">Classic Italian pasta with pancetta, egg, and pecorino cheese</p>
+            </div>
+        </section>
+
+        <section class="special-section">
+            <h3>Today's Daily Special</h3>
+            <div class="menu-item special">
+                <label>
+                    <input type="checkbox" name="daily_special" value="1">
+                    {{ daily_special.name }} - ${{ daily_special.price }}
+                </label>
+                <p class="item-description">{{ daily_special.description }}</p>
+                <input type="hidden" name="daily_special_name" value="{{ daily_special.name }}">
+                <input type="hidden" name="daily_special_price" value="{{ daily_special.price }}">
+            </div>
+        </section>
+
+        <section class="instructions-section">
+            <h3>Special Instructions</h3>
+            <textarea name="special_instructions" rows="3" placeholder="Any special requests or dietary restrictions?"></textarea>
+        </section>
+
+        <section class="customer-section">
+            <h3>Customer Information</h3>
+
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone:</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+        </section>
+
+        <div class="submit-section">
+            <button type="submit" class="submit-button">Place Order</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

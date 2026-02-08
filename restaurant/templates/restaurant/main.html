@@ -1,0 +1,52 @@
+{% extends 'restaurant/base.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="main-content">
+    <section class="welcome">
+        <h2>Welcome to Nicky's Italian Dream</h2>
+        <p>Experience authentic Italian cuisine in the heart of Boston. Our family recipes have been passed down for 0 generations, bringing you a pretty bad taste of Italy.</p>
+    </section>
+
+    <section class="info-section">
+        <div class="location">
+            <h3>Location</h3>
+            <p>1260 Boylston Street<br>
+               Boston, MA 02215</p>
+        </div>
+
+        <div class="hours">
+            <h3>Hours of Operation</h3>
+            <table class="hours-table">
+                <tr>
+                    <td>Monday - Thursday</td>
+                    <td>11:00 AM - 9:00 PM</td>
+                </tr>
+                <tr>
+                    <td>Friday - Saturday</td>
+                    <td>11:00 AM - 10:00 PM</td>
+                </tr>
+                <tr>
+                    <td>Sunday</td>
+                    <td>12:00 PM - 8:00 PM</td>
+                </tr>
+            </table>
+        </div>
+    </section>
+
+    <section class="gallery">
+        <h3>Our Restaurant</h3>
+        <div class="image-container">
+            <img src="{% static 'images/restaurant.jpg' %}" alt="Restaurant interior">
+            <img src="{% static 'images/pasta.jpg' %}" alt="Delicious pasta dish">
+        </div>
+    </section>
+
+    <section class="cta">
+        <h3>Ready to Order?</h3>
+        <p>Place your order online for pickup!</p>
+        <a href="{% url 'order' %}" class="order-button">Order Now</a>
+    </section>
+</div>
+{% endblock %}
