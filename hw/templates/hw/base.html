@@ -1,15 +1,17 @@
-{% extends 'hw/base.html' %}
 {% load static %}
-
 <html>
     <head>
         <title>Hello, world!</title>
         <link rel="stylesheet" href="{% static 'styles.css' %}">
     </head>
     <body>
- 
+        <h1>This is text taken from the base html file!</h1>
+        <nav>
+            <li><a href="{% url 'home_page' %}">Home</a></li>
+            <li><a href="{% url 'about_page' %}">About</a></li>
+        </nav>
+
         {% block content %}
-        <h1>Hello world!</h1>
         {% endblock content %}
  
  
