@@ -1,0 +1,31 @@
+{% load static %}
+
+<html>
+    <head>
+        <title>Mega Insta</title>
+        <link rel="stylesheet" href="{% static 'styles-blog.css' %}">
+    </head>
+
+    <body>
+        <head>
+            <header>
+                <h1>Mega Instagram</h1>
+                <nav>
+
+                </nav>
+            </header>
+        </head>
+
+        {% block content %}
+        {% endblock %}
+
+        <footer>
+            <nav>
+                <ul>
+                    <li><a href="{% url 'show_all_profiles' %}">Home</a></li>
+                </ul>
+            </nav>
+        </footer>
+
+    </body>
+</html>

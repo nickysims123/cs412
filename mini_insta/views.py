@@ -11,3 +11,16 @@ class ShowAllView(ListView):
 
     model = Profile
     
+class ProfileListView(ListView):
+    '''Define a view to list profiles'''
+
+    model = Profile 
+    template_name = 'mini_insta/show_all_profiles.html'
+    context_object_name = 'profiles'
+
+class ProfileDetailView(DetailView):
+    '''Define a view to show one profile'''
+
+    model = Profile 
+    template_name = 'mini_insta/show_profile.html'
+    context_object_name = 'profile'

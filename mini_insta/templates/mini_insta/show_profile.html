@@ -1,0 +1,22 @@
+{% extends 'mini_insta/base.html' %}
+
+{% block content %}
+
+<h1>{{profile.display_name}}</h1>
+
+
+<main class="grid-container">
+
+    <article>
+        <div>
+            <h2>{{profile.display_name}}</h2>
+            <h3>{{profile.username}}</h3>
+            <p>{{profile.bio_text}}</p>
+            <p><b>{{profile.join_date}}</b></p>
+        </div>
+
+        <img src="{{profile.profile_image_url}}" alt="">
+    </article>
+</main>
+
+{% endblock %}
