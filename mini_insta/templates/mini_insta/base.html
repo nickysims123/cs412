@@ -1,3 +1,10 @@
+<!--
+File: base.html
+Author: Nicholas Sima (nicksima@bu.edu)
+Description: base html template for all mini_insta pages
+:-->
+
+
 {% load static %}
 
 <html>
@@ -23,6 +30,9 @@
             <nav>
                 <ul>
                     <li><a href="{% url 'show_all_profiles' %}">Home</a></li>
+                    {% if profile %}
+                    <li><a href="{% url 'create_post' profile.pk %}">Create Post</a></li>
+                    {% endif %}
                 </ul>
             </nav>
         </footer>

@@ -1,0 +1,28 @@
+<!--
+File: create_post_form.html
+Author: Nicholas Sima (nicksima@bu.edu)
+Description: page to display a form for creating posts
+-->
+
+
+{% extends 'mini_insta/base.html' %}
+
+{% block content %}
+
+<h1>Create a New Post</h1>
+
+<form action="{% url 'create_post' profile.pk %}" method="post">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <label for="image_url">Image URL:</label>
+    <input type="url" name="image_url" id="image_url" placeholder="Enter an image URL">
+
+    <br><br>
+
+    <input type="submit" value="Create Post">
+    <a href="{% url 'show_profile' profile.pk %}">Cancel</a>
+</form>
+
+{% endblock %}

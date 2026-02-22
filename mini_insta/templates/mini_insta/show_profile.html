@@ -1,3 +1,10 @@
+<!--
+File: show_profile.html
+Author: Nicholas Sima (nicksima@bu.edu)
+Description: page to show a single profile from mini_insta
+-->
+
+
 {% extends 'mini_insta/base.html' %}
 
 {% block content %}
@@ -17,6 +24,24 @@
 
         <img src="{{profile.profile_image_url}}" alt="">
     </article>
+
+    <h2>Posts</h2>
+
+    {% for post in profile.get_all_posts %}
+    <article>
+        <a href="{% url 'show_post' post.pk %}">
+            {% if post.get_all_photos.first %}
+                <img src="{{ post.get_all_photos.first.image_url }}" alt="Post image">
+            {% else %}
+                <p><i>No image available</i></p>
+            {% endif %}
+            <p>{{ post.caption }}</p>
+        </a>
+    </article>
+    {% empty %}
+    <p>No posts yet.</p>
+    {% endfor %}
+
 </main>
 
 {% endblock %}

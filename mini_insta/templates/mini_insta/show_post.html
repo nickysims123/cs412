@@ -1,0 +1,35 @@
+<!--
+File: show_post.html
+Author: Nicholas Sima (nicksima@bu.edu)
+Description: page to show a single post from mini_insta
+-->
+
+{% extends 'mini_insta/base.html' %}
+
+{% block content %}
+
+<h1>Post by {{ post.profile.display_name }}</h1>
+
+<main class="grid-container">
+
+    <article>
+        <p><b>Caption:</b> {{ post.caption }}</p>
+        <p><b>Timestamp:</b> {{ post.timestamp }}</p>
+    </article>
+
+    <h2>Photos</h2>
+
+    {% for photo in post.get_all_photos %}
+    <article>
+        <img src="{{ photo.image_url }}" alt="Post photo">
+        <p>{{ photo.timestamp }}</p>
+    </article>
+    {% empty %}
+    <p>No photos for this post.</p>
+    {% endfor %}
+
+    <a href="{% url 'show_profile' post.profile.pk %}">Back to Profile</a>
+
+</main>
+
+{% endblock %}
