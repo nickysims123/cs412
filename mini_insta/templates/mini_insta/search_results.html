@@ -1,0 +1,43 @@
+<!--
+File: search_results.html
+Author: Nicholas Sima (nicksima@bu.edu)
+Description: page to display search results for profiles and posts
+-->
+
+
+{% extends 'mini_insta/base.html' %}
+
+{% block content %}
+
+<h1>Search Results for "{{ query }}"</h1>
+
+<h2>Profiles</h2>
+
+{% for p in profiles %}
+<article>
+    <a href="{% url 'show_profile' p.pk %}">
+        <img src="{{ p.profile_image_url }}" alt="" height="60">
+        <b>{{ p.display_name }}</b> ({{ p.username }})
+    </a>
+    <p>{{ p.bio_text }}</p>
+</article>
+{% empty %}
+<p>No profiles match "{{ query }}".</p>
+{% endfor %}
+
+<h2>Posts</h2>
+
+{% for post in posts %}
+<article>
+    <a href="{% url 'show_post' post.pk %}">
+        {% if post.get_all_photos.first %}
+            <img src="{{ post.get_all_photos.first.get_image_url }}" alt="Post image" height="150">
+        {% endif %}
+        <p><b>{{ post.profile.display_name }}</b>: {{ post.caption }}</p>
+    </a>
+</article>
+{% empty %}
+<p>No posts match "{{ query }}".</p>
+{% endfor %}
+
+{% endblock %}

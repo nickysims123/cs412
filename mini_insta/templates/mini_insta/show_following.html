@@ -1,0 +1,28 @@
+<!--
+File: show_following.html
+Author: Nicholas Sima (nicksima@bu.edu)
+Description: page to display profiles that a profile is following
+-->
+
+
+{% extends 'mini_insta/base.html' %}
+
+{% block content %}
+
+<h1>{{ profile.display_name }} is Following</h1>
+
+<main class="grid-container">
+    {% for followed in profile.get_following %}
+    <article>
+        <a href="{% url 'show_profile' followed.pk %}">
+            <img src="{{ followed.profile_image_url }}" alt="" height="100">
+            <h3>{{ followed.display_name }}</h3>
+            <p>{{ followed.username }}</p>
+        </a>
+    </article>
+    {% empty %}
+    <p>Not following anyone yet.</p>
+    {% endfor %}
+</main>
+
+{% endblock %}

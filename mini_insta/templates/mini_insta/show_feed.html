@@ -1,0 +1,47 @@
+<!--
+File: show_feed.html
+Author: Nicholas Sima (nicksima@bu.edu)
+Description: page to display the post feed for a profile
+-->
+
+
+{% extends 'mini_insta/base.html' %}
+
+{% block content %}
+
+<h1>{{ profile.display_name }}'s Feed</h1>
+
+<p><a href="{% url 'show_profile' profile.pk %}">Back to Profile</a></p>
+
+<main class="grid-container">
+    {% for post in posts %}
+    <article>
+        <div>
+            <img src="{{ post.profile.profile_image_url }}" alt="" height="50">
+            <a href="{% url 'show_profile' post.profile.pk %}"><b>{{ post.profile.display_name }}</b></a>
+        </div>
+
+        <a href="{% url 'show_post' post.pk %}">
+            {% if post.get_all_photos.first %}
+                <img src="{{ post.get_all_photos.first.get_image_url }}" alt="Post image" height="300">
+            {% else %}
+                <p><i>No image</i></p>
+            {% endif %}
+        </a>
+
+        <p><b>Likes:</b> {{ post.get_likes.count }}</p>
+        <p>{{ post.caption }}</p>
+
+        {% for comment in post.get_all_comments %}
+        <p><b>{{ comment.profile.display_name }}</b>: {{ comment.text }}</p>
+        {% empty %}
+        <p><i>No comments.</i></p>
+        {% endfor %}
+    </article>
+    <hr>
+    {% empty %}
+    <p>No posts in your feed. Follow some profiles to see their posts here.</p>
+    {% endfor %}
+</main>
+
+{% endblock %}

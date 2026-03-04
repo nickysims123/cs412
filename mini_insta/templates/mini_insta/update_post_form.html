@@ -1,0 +1,25 @@
+<!--
+File: update_post_form.html
+Author: Nicholas Sima (nicksima@bu.edu)
+Description: page to display a form for updating a post
+-->
+
+
+{% extends 'mini_insta/base.html' %}
+
+{% block content %}
+
+<h1>Update Post</h1>
+
+<form action="{% url 'update_post' post.pk %}" method="post">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <br>
+
+    <input type="submit" value="Save Changes">
+    <a href="{% url 'show_post' post.pk %}">Cancel</a>
+</form>
+
+{% endblock %}

@@ -25,13 +25,21 @@ Description: page to show a single profile from mini_insta
         <img src="{{profile.profile_image_url}}" alt="">
     </article>
 
+    <a href="{% url 'update_profile' profile.pk %}">Update Profile</a>
+
+    <p>
+        <a href="{% url 'show_followers' profile.pk %}">{{ profile.get_num_followers }} Followers</a>
+        &nbsp;|&nbsp;
+        <a href="{% url 'show_following' profile.pk %}">{{ profile.get_num_following }} Following</a>
+    </p>
+
     <h2>Posts</h2>
 
     {% for post in profile.get_all_posts %}
     <article>
         <a href="{% url 'show_post' post.pk %}">
             {% if post.get_all_photos.first %}
-                <img src="{{ post.get_all_photos.first.image_url }}" alt="Post image">
+                <img src="{{ post.get_all_photos.first.get_image_url }}" alt="Post image">
             {% else %}
                 <p><i>No image available</i></p>
             {% endif %}

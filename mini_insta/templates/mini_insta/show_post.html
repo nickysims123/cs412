@@ -13,6 +13,7 @@ Description: page to show a single post from mini_insta
 <main class="grid-container">
 
     <article>
+        <p><b>Likes:</b> {{ post.get_likes.count }}</p>
         <p><b>Caption:</b> {{ post.caption }}</p>
         <p><b>Timestamp:</b> {{ post.timestamp }}</p>
     </article>
@@ -21,14 +22,27 @@ Description: page to show a single post from mini_insta
 
     {% for photo in post.get_all_photos %}
     <article>
-        <img src="{{ photo.image_url }}" alt="Post photo">
+        <img src="{{ photo.get_image_url }}" alt="Post photo">
         <p>{{ photo.timestamp }}</p>
     </article>
     {% empty %}
     <p>No photos for this post.</p>
     {% endfor %}
 
+    <h2>Comments</h2>
+
+    {% for comment in post.get_all_comments %}
+    <article>
+        <p><b>{{ comment.profile.display_name }}</b>: {{ comment.text }}</p>
+        <p><i>{{ comment.timestamp }}</i></p>
+    </article>
+    {% empty %}
+    <p>No comments yet.</p>
+    {% endfor %}
+
     <a href="{% url 'show_profile' post.profile.pk %}">Back to Profile</a>
+    <a href="{% url 'update_post' post.pk %}">Update</a>
+    <a href="{% url 'delete_post' post.pk %}">Delete</a>
 
 </main>
 
