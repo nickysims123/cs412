@@ -1,0 +1,41 @@
+<!--    
+File: voter_details.html
+Author: Nicholas Sima (nicksima@bu.edu)
+Description: html template to display one voter's information
+-->
+
+
+{% extends 'voter_analytics/base.html' %}
+
+{% block content %}
+<h1>{{ voter.first_name }} {{ voter.last_name }}</h1>
+
+<table border="1" cellpadding="4">
+    <tr><th>First Name</th><td>{{ voter.first_name }}</td></tr>
+    <tr><th>Last Name</th><td>{{ voter.last_name }}</td></tr>
+    <tr><th>Address</th>
+        <td>
+            {{ voter.street_number }} {{ voter.street_name }}
+            {% if voter.apt %}, Apt {{ voter.apt }}{% endif %},
+            Newton, MA {{ voter.zip_code }}
+        </td>
+    </tr>
+    <tr><th>Date of Birth</th><td>{{ voter.dob }}</td></tr>
+    <tr><th>Date Registered</th><td>{{ voter.date_registered }}</td></tr>
+    <tr><th>Party</th><td>{{ voter.party }}</td></tr>
+    <tr><th>Precinct</th><td>{{ voter.precinct }}</td></tr>
+    <tr><th>Voter Score</th><td>{{ voter.voter_score }}</td></tr>
+    <tr><th>2020 State</th><td>{{ voter.v20state }}</td></tr>
+    <tr><th>2021 Town</th><td>{{ voter.v21town }}</td></tr>
+    <tr><th>2021 Primary</th><td>{{ voter.v21primary }}</td></tr>
+    <tr><th>2022 General</th><td>{{ voter.v22general }}</td></tr>
+    <tr><th>2023 Town</th><td>{{ voter.v23town }}</td></tr>
+</table>
+
+<p>
+    <a href="https://www.google.com/maps/search/?api=1&query={{ voter.street_number }}+{{ voter.street_name }},+Newton,+MA+{{ voter.zip_code }}" target="_blank">
+        View on Google Maps
+    </a>
+</p>
+
+{% endblock %}

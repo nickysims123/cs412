@@ -1,0 +1,25 @@
+<!-- 
+File: base.html
+Author: Nicholas Sima (nicksima@bu.edu)
+Description: base html template for all voter_analytics pages
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Voter Analytics</title>
+</head>
+<body>
+
+    {% block content %}
+    {% endblock %}
+
+    <footer>
+        <nav>
+            <a href="{% url 'voters' %}">All Voters</a> |
+            <a href="{% url 'graphs' %}">Graphs</a>
+        </nav>
+    </footer>
+
+</body>
+</html>

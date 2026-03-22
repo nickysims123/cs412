@@ -1,0 +1,22 @@
+<!--
+File: graphs.html
+Author: Nicholas Sima (nicksima@bu.edu)
+Description: graphs html template to display voter graphs
+-->
+
+
+
+{% extends 'voter_analytics/base.html' %}
+
+{% block content %}
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+<h1>Voter Graphs</h1>
+
+{% include 'voter_analytics/filter_form.html' %}
+
+<div>{{ birth_year_graph|safe }}</div>
+<div>{{ party_graph|safe }}</div>
+<div>{{ election_graph|safe }}</div>
+
+{% endblock %}
