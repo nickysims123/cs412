@@ -3,9 +3,13 @@
 # Description: file to define both webapp and api level views
 
 from django.views.generic import ListView, DetailView, TemplateView
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.authentication import BasicAuthentication
+from rest_framework.permissions import AllowAny
 from .models import Joke, Picture
 from .serializers import JokeSerializer, PictureSerializer
 import random
@@ -67,8 +71,12 @@ class RandomJokeAPIView(APIView):
         return Response(JokeSerializer(joke).data)
 
 
+@method_decorator(csrf_exempt, name='dispatch')
 class JokeListAPIView(APIView):
     '''Return all Jokes as JSON (GET), or create a new Joke (POST)'''
+
+    authentication_classes = []
+    permission_classes = [AllowAny]
 
     def get(self, request):
         jokes = Joke.objects.all()
