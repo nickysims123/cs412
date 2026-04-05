@@ -1,0 +1,22 @@
+<!--
+File: pictures.html
+Author: Nicholas Sima (nicksima@bu.edu)
+Description: page to show all pictures (no jokes)
+:-->
+
+{% extends 'dadjokes/base.html' %}
+
+{% block content %}
+
+<h2>All Pictures</h2>
+
+{% for picture in pictures %}
+<div>
+    <img src="{{ picture.image_url }}" alt="Silly picture">
+    <p><em>Contributed by {{ picture.contributor }} on {{ picture.created }}</em></p>
+    <a href="{% url 'dadjokes_picture' picture.pk %}">View</a>
+</div>
+<hr>
+{% endfor %}
+
+{% endblock %}

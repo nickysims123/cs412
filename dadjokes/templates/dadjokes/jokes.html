@@ -1,0 +1,22 @@
+<!--
+File: jokes.html
+Author: Nicholas Sima (nicksima@bu.edu)
+Description: page to display all jokes (no images)
+:-->
+
+{% extends 'dadjokes/base.html' %}
+
+{% block content %}
+
+<h2>All Dad Jokes</h2>
+
+{% for joke in jokes %}
+<div>
+    <p>{{ joke.text }}</p>
+    <p><em>Contributed by {{ joke.contributor }} on {{ joke.created }}</em></p>
+    <a href="{% url 'dadjokes_joke' joke.pk %}">View</a>
+</div>
+<hr>
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,23 @@
+<!--
+File: random.html
+Author: Nicholas Sima (nicksima@bu.edu)
+Description: page to show 1 joke and 1 picture selected at random
+:-->
+
+{% extends 'dadjokes/base.html' %}
+
+{% block content %}
+
+<h2>Random Dad Joke</h2>
+<p>{{ joke.text }}</p>
+<p><em>Contributed by {{ joke.contributor }} on {{ joke.created }}</em></p>
+<a href="{% url 'dadjokes_joke' joke.pk %}">Permalink</a>
+
+<hr>
+
+<h2>Random Picture</h2>
+<img src="{{ picture.image_url }}" alt="Silly picture">
+<p><em>Contributed by {{ picture.contributor }} on {{ picture.created }}</em></p>
+<a href="{% url 'dadjokes_picture' picture.pk %}">Permalink</a>
+
+{% endblock %}

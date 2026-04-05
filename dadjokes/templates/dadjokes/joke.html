@@ -1,0 +1,15 @@
+<!--
+File: joke.html
+Author: Nicholas Sima (nicksima@bu.edu)
+Description: shows one joke by primary key
+:-->
+
+{% extends 'dadjokes/base.html' %}
+
+{% block content %}
+
+<h2>Dad Joke #{{ joke.pk }}</h2>
+<p>{{ joke.text }}</p>
+<p><em>Contributed by {{ joke.contributor }} on {{ joke.created }}</em></p>
+
+{% endblock %}

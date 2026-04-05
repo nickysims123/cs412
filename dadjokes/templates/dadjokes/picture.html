@@ -1,0 +1,15 @@
+<!--
+File: picture.html
+Author: Nicholas Sima (nicksima@bu.edu)
+Description: page to show 1 picture by primary key
+:-->
+
+{% extends 'dadjokes/base.html' %}
+
+{% block content %}
+
+<h2>Picture #{{ picture.pk }}</h2>
+<img src="{{ picture.image_url }}" alt="Silly picture">
+<p><em>Contributed by {{ picture.contributor }} on {{ picture.created }}</em></p>
+
+{% endblock %}

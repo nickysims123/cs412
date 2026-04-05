@@ -1,0 +1,26 @@
+<!--
+File: base.html
+Author: Nicholas Sima (nicksima@bu.edu)
+Description: base html template for all dadjokes pages
+:-->
+
+<html>
+    <head>
+        <title>Dad Jokes</title>
+    </head>
+    <body>
+        <header>
+            <h1>Dad Jokes</h1>
+            <nav>
+                <ul>
+                    <li><a href="{% url 'dadjokes_random' %}">Random</a></li>
+                    <li><a href="{% url 'dadjokes_jokes' %}">All Jokes</a></li>
+                    <li><a href="{% url 'dadjokes_pictures' %}">All Pictures</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        {% block content %}
+        {% endblock %}
+    </body>
+</html>
