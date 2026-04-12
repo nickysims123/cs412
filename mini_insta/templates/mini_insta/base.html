@@ -18,7 +18,24 @@ Description: base html template for all mini_insta pages
             <header>
                 <h1>Mega Instagram</h1>
                 <nav>
-
+                    {% if user.is_authenticated %}
+                        <span>Logged in as: <strong>{{ user.username }}</strong></span>
+                        &nbsp;|&nbsp;
+                        <a href="{% url 'show_own_profile' %}">My Profile</a>
+                        &nbsp;|&nbsp;
+                        <form method="post" action="{% url 'logout' %}" style="display:inline">
+                            {% csrf_token %}
+                            <button type="submit">Logout</button>
+                        </form>
+                    {% else %}
+                        <span>Not logged in.</span>
+                        &nbsp;|&nbsp;
+                        <a href="{% url 'show_all_profiles' %}">All Profiles</a>
+                        &nbsp;|&nbsp;
+                        <a href="{% url 'login' %}">Login</a>
+                        &nbsp;|&nbsp;
+                        <a href="{% url 'create_profile' %}">Register</a>
+                    {% endif %}
                 </nav>
             </header>
         </head>
@@ -30,13 +47,17 @@ Description: base html template for all mini_insta pages
             <nav>
                 <ul>
                     {% if profile %}
-                    <li><a href="{% url 'show_feed' profile.pk %}">Home</a></li>
-                    <li><a href="{% url 'show_profile' profile.pk %}">Profile</a></li>
-                    <li><a href="{% url 'create_post' profile.pk %}">Create Post</a></li>
-                    <li><a href="{% url 'search' profile.pk %}">Search</a></li>
-                    {% else %}
-                    <li><a href="{% url 'show_all_profiles' %}">Home</a></li>
+                    {% if user.is_authenticated and profile.user == user %}
+                    <li><a href="{% url 'show_feed' %}">Feed</a></li>
                     {% endif %}
+                    <li><a href="{% url 'show_profile' profile.pk %}">Profile</a></li>
+                    {% if user.is_authenticated and profile.user == user %}
+                    <li><a href="{% url 'create_post' %}">Create Post</a></li>
+                    <li><a href="{% url 'search' %}">Search</a></li>
+                    {% endif %}
+                    {% else %}
+                    {% endif %}
+                    <li><a href="{% url 'show_all_profiles' %}">Home</a></li>
                 </ul>
             </nav>
         </footer>

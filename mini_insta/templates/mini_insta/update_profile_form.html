@@ -11,7 +11,7 @@ Description: page to display a form for updating a profile
 
 <h1>Update Profile</h1>
 
-<form action="{% url 'update_profile' profile.pk %}" method="post">
+<form action="{% url 'update_profile' %}" method="post">
     {% csrf_token %}
 
     {{ form.as_p }}

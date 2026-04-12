@@ -11,7 +11,7 @@ Description: page to display a search form for profiles and posts
 
 <h1>Search</h1>
 
-<form action="{% url 'search' profile.pk %}" method="get">
+<form action="{% url 'search' %}" method="get">
     <label for="query">Search profiles and posts:</label>
     <input type="text" name="query" id="query" placeholder="Enter search term">
     <button type="submit">Search</button>

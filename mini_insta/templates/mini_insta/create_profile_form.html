@@ -1,0 +1,29 @@
+<!--
+File: create_profile_form.html
+Author: Nicholas Sima (nicksima@bu.edu)
+Description: page to display a form for creating a new profile and user account
+-->
+
+
+{% extends 'mini_insta/base.html' %}
+
+{% block content %}
+
+<h1>Create Profile</h1>
+
+<form action="{% url 'create_profile' %}" method="post">
+    {% csrf_token %}
+
+    <h2>Account Information</h2>
+    {{ user_creation_form.as_p }}
+
+    <h2>Profile Information</h2>
+    {{ form.as_p }}
+
+    <br>
+
+    <input type="submit" value="Create Profile">
+    <a href="{% url 'show_all_profiles' %}">Cancel</a>
+</form>
+
+{% endblock %}

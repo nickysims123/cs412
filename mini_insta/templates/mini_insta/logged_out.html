@@ -1,0 +1,16 @@
+<!--
+File: logged_out.html
+Author: Nicholas Sima (nicksima@bu.edu)
+Description: logout confirmation page for mini_insta
+-->
+
+{% extends 'mini_insta/base.html' %}
+
+{% block content %}
+
+<h1>You have been logged out.</h1>
+
+<p><a href="{% url 'login' %}">Log in again</a></p>
+<p><a href="{% url 'show_all_profiles' %}">Browse all profiles</a></p>
+
+{% endblock %}

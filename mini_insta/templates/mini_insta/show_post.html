@@ -13,7 +13,16 @@ Description: page to show a single post from mini_insta
 <main class="grid-container">
 
     <article>
-        <p><b>Likes:</b> {{ post.get_likes.count }}</p>
+        <p>
+            <b>Likes:</b> {{ post.get_likes.count }}
+            {% if user.is_authenticated and post.profile.user != user %}
+                {% if is_liked %}
+                &nbsp;<a href="{% url 'delete_like' post.pk %}">Unlike</a>
+                {% else %}
+                &nbsp;<a href="{% url 'like_post' post.pk %}">Like</a>
+                {% endif %}
+            {% endif %}
+        </p>
         <p><b>Caption:</b> {{ post.caption }}</p>
         <p><b>Timestamp:</b> {{ post.timestamp }}</p>
     </article>
@@ -41,8 +50,10 @@ Description: page to show a single post from mini_insta
     {% endfor %}
 
     <a href="{% url 'show_profile' post.profile.pk %}">Back to Profile</a>
+    {% if user.is_authenticated and post.profile.user == user %}
     <a href="{% url 'update_post' post.pk %}">Update</a>
     <a href="{% url 'delete_post' post.pk %}">Delete</a>
+    {% endif %}
 
 </main>
 

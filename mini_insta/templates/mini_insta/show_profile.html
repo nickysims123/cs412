@@ -25,13 +25,23 @@ Description: page to show a single profile from mini_insta
         <img src="{{profile.profile_image_url}}" alt="">
     </article>
 
-    <a href="{% url 'update_profile' profile.pk %}">Update Profile</a>
+    {% if user.is_authenticated and profile.user == user %}
+    <a href="{% url 'update_profile' %}">Update Profile</a>
+    {% endif %}
 
     <p>
         <a href="{% url 'show_followers' profile.pk %}">{{ profile.get_num_followers }} Followers</a>
         &nbsp;|&nbsp;
         <a href="{% url 'show_following' profile.pk %}">{{ profile.get_num_following }} Following</a>
     </p>
+
+    {% if user.is_authenticated and profile.user != user %}
+        {% if is_following %}
+        <a href="{% url 'delete_follow' profile.pk %}">Unfollow</a>
+        {% else %}
+        <a href="{% url 'follow_profile' profile.pk %}">Follow</a>
+        {% endif %}
+    {% endif %}
 
     <h2>Posts</h2>
 

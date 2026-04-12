@@ -11,7 +11,7 @@ Description: page to display a form for creating posts
 
 <h1>Create a New Post</h1>
 
-<form action="{% url 'create_post' profile.pk %}" method="post" enctype="multipart/form-data">
+<form action="{% url 'create_post' %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
 
     {{ form.as_p }}

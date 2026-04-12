@@ -4,12 +4,14 @@
 
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 # Create your models here.
 
 class Profile(models.Model):
     '''Encapsulate an instagram profile'''
 
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     username = models.TextField(blank=True)
     display_name = models.TextField(blank=True)
     profile_image_url = models.TextField(blank=True)
