@@ -16,7 +16,10 @@ from django.utils.decorators import method_decorator
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.authtoken.models import Token
+from django.contrib.auth import authenticate
 from .serializers import ProfileSerializer, PostSerializer
 from .models import Profile, Post, Photo, Follow, Like
 from .forms import CreatePostForm, CreateProfileForm, UpdateProfileForm, UpdatePostForm
@@ -298,11 +301,33 @@ class CreateProfileView(CreateView):
 # REST API views
 
 @method_decorator(csrf_exempt, name='dispatch')
-class ProfileListAPIView(APIView):
-    '''Return all Profiles as JSON (GET).'''
+class LoginAPIView(APIView):
+    '''Authenticate a user and return their token and profile_id (POST).'''
 
     authentication_classes = []
     permission_classes = [AllowAny]
+
+    def post(self, request):
+        username = request.data.get('username')
+        password = request.data.get('password')
+        user = authenticate(username=username, password=password)
+        if user is None:
+            return Response({'error': 'Invalid credentials.'}, status=status.HTTP_401_UNAUTHORIZED)
+        token, _ = Token.objects.get_or_create(user=user)
+        try:
+            profile = Profile.objects.get(user=user)
+            profile_id = profile.pk
+        except Profile.DoesNotExist:
+            profile_id = None
+        return Response({'token': token.key, 'profile_id': profile_id})
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class ProfileListAPIView(APIView):
+    '''Return all Profiles as JSON (GET).'''
+
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
     def get(self, request):
         profiles = Profile.objects.all()
@@ -313,8 +338,8 @@ class ProfileListAPIView(APIView):
 class ProfileDetailAPIView(APIView):
     '''Return one Profile by primary key as JSON (GET).'''
 
-    authentication_classes = []
-    permission_classes = [AllowAny]
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
     def get(self, request, pk):
         profile = Profile.objects.get(pk=pk)
@@ -325,8 +350,8 @@ class ProfileDetailAPIView(APIView):
 class ProfilePostListAPIView(APIView):
     '''Return all Posts for a Profile as JSON (GET), or create a new Post (POST).'''
 
-    authentication_classes = []
-    permission_classes = [AllowAny]
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
     def get(self, request, pk):
         profile = Profile.objects.get(pk=pk)
@@ -346,8 +371,8 @@ class ProfilePostListAPIView(APIView):
 class ProfileFeedAPIView(APIView):
     '''Return the post feed for a Profile as JSON (GET).'''
 
-    authentication_classes = []
-    permission_classes = [AllowAny]
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
     def get(self, request, pk):
         profile = Profile.objects.get(pk=pk)

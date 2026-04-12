@@ -21,7 +21,7 @@ from .views import ShowOwnProfileView
 from .views import CreateProfileView
 from .views import FollowProfileView, DeleteFollowView
 from .views import LikePostView, DeleteLikeView
-from .views import ProfileListAPIView, ProfileDetailAPIView, ProfilePostListAPIView, ProfileFeedAPIView
+from .views import LoginAPIView, ProfileListAPIView, ProfileDetailAPIView, ProfilePostListAPIView, ProfileFeedAPIView
 
 
 urlpatterns = [
@@ -50,6 +50,7 @@ urlpatterns = [
     path('profile/search', SearchView.as_view(), name="search"),
 
     # REST endpoints
+    path('api/login', LoginAPIView.as_view(), name='api_login'),
     path('api/profiles', ProfileListAPIView.as_view(), name='api_profiles'),
     path('api/profile/<int:pk>', ProfileDetailAPIView.as_view(), name='api_profile'),
     path('api/profile/<int:pk>/posts', ProfilePostListAPIView.as_view(), name='api_profile_posts'),
