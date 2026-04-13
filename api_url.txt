@@ -1,1 +1,1 @@
-https://cs-webapps.bu.edu/nicksima/dadjokes/api/
+https://cs-webapps.bu.edu/nicksima/mini_insta/api/profiles
