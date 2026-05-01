@@ -1,0 +1,552 @@
+/* 
+File: styles-project.css
+Author: Nicholas Sima (nicksima@bu.edu)
+Description: styling for the University Tracker project
+*/
+
+:root {
+    --bg: #f4f6f8;
+    --surface: #ffffff;
+    --border: #e1e5ea;
+    --text: #1f2937;
+    --muted: #6b7280;
+    --accent: #2c5282;
+    --accent-hover: #1f3a64;
+    --danger: #b91c1c;
+    --danger-bg: #fef2f2;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+    line-height: 1.5;
+}
+
+header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.4rem;
+}
+
+header h1 a {
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+}
+
+nav a {
+    display: inline-block;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+
+nav a:hover {
+    background: var(--bg);
+    color: var(--text);
+}
+
+.auth {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+main {
+    max-width: 1000px;
+    margin: 1.5rem auto;
+    padding: 0 2rem;
+}
+
+.auth-form {
+    display: inline;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: transparent;
+    max-width: none;
+    box-shadow: none;
+    border-radius: 0;
+}
+
+h1 { font-size: 1.8rem; margin-top: 1.5rem; }
+h2 { font-size: 1.25rem; color: var(--muted); }
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { color: var(--accent-hover); text-decoration: underline; }
+
+ul {
+    padding-left: 0;
+    list-style: none;
+}
+
+ul li {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.5rem;
+}
+
+ul li img {
+    vertical-align: middle;
+    border-radius: 6px;
+    margin-right: 0.5rem;
+}
+
+
+.list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 1.5rem 0 1.25rem 0;
+}
+
+.list-header h1 { margin: 0; }
+
+.add-button {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.add-button:hover {
+    background: var(--accent-hover);
+    color: #fff;
+    text-decoration: none;
+}
+
+.entity-list {
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.75rem;
+    margin: 0;
+}
+
+.entity-list li {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.1rem 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 1.1rem;
+    margin: 0;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+    transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.entity-list li:hover {
+    box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+    transform: translateY(-1px);
+}
+
+.entity-list .thumb {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    flex-shrink: 0;
+    background: var(--bg);
+    margin: 0;
+}
+
+.entity-list .thumb-placeholder {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+    flex-shrink: 0;
+    background: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted);
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.entity-list .body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    min-width: 0;
+}
+
+.entity-list .title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.3;
+}
+
+.entity-list .meta {
+    color: var(--muted);
+    font-size: 0.92rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+}
+
+.entity-list .meta span + span::before {
+    content: "•";
+    margin-right: 0.85rem;
+    color: var(--border);
+}
+
+.entity-list .actions {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.entity-list .edit-link {
+    background: transparent;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 0.35rem 0.85rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.entity-list .edit-link:hover {
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+}
+
+.entity-list li.empty {
+    background: transparent;
+    border: 1px dashed var(--border);
+    color: var(--muted);
+    text-align: center;
+    padding: 2rem;
+    font-style: italic;
+    box-shadow: none;
+    justify-content: center;
+}
+
+.entity-list li.empty:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+/* forms */
+form {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem 2.25rem;
+    margin: 0 auto 2rem auto;
+    max-width: 640px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+
+form p {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin: 0 0 1.1rem 0;
+}
+
+form p label,
+form .form-row label {
+    font-weight: 500;
+    font-size: 0.88rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+label { font-weight: 500; display: inline-block; }
+
+form input[type="text"],
+form input[type="number"],
+form input[type="email"],
+form input[type="password"],
+form input[type="url"],
+form input[type="file"],
+form select,
+form textarea {
+    width: 100%;
+    min-width: 0;
+    padding: 0.65rem 0.85rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: #fff;
+    font-size: 1rem;
+    font-family: inherit;
+    color: var(--text);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="password"],
+input[type="url"],
+input[type="file"],
+select,
+textarea {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: #fff;
+    font-size: 0.95rem;
+    font-family: inherit;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(44, 82, 130, 0.15);
+}
+
+button,
+input[type="submit"] {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.65rem 1.4rem;
+    font-size: 0.98rem;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.15s ease;
+}
+
+button:hover,
+input[type="submit"]:hover {
+    background: var(--accent-hover);
+}
+
+form input[type="submit"] {
+    margin-top: 0.5rem;
+}
+
+form input[type="submit"] + a {
+    display: inline-block;
+    margin-left: 0.5rem;
+    padding: 0.65rem 1.2rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.98rem;
+    font-weight: 500;
+    background: #fff;
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+form input[type="submit"] + a:hover {
+    background: var(--bg);
+    color: var(--text);
+    border-color: var(--text);
+    text-decoration: none;
+}
+
+fieldset {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    margin: 1.25rem 0;
+}
+
+fieldset legend {
+    padding: 0 0.5rem;
+    color: var(--muted);
+    font-weight: 500;
+    font-size: 0.88rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+form h1 + h1, main > h1 {
+    text-align: center;
+}
+
+form ul {
+    margin: 0;
+    padding: 0;
+}
+
+form ul li {
+    background: transparent;
+    border: none;
+    padding: 0.15rem 0;
+    margin: 0;
+}
+
+/* hated_students search + checkbox list */
+#hatred-search {
+    width: 100%;
+    margin-bottom: 0.5rem;
+}
+
+#hatred-list {
+    max-height: 240px;
+    overflow-y: auto;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.5rem 0.75rem;
+    background: var(--bg);
+}
+
+#hatred-list ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+#hatred-list li {
+    background: transparent;
+    border: none;
+    padding: 0.15rem 0;
+    margin: 0;
+}
+
+#hatred-list label {
+    font-weight: 400;
+    display: block;
+    cursor: pointer;
+    padding: 0.2rem 0.3rem;
+    border-radius: 4px;
+}
+
+#hatred-list label:hover {
+    background: #fff;
+}
+
+/* error box */
+.errors {
+    background: var(--danger-bg);
+    border: 1px solid var(--danger);
+    color: var(--danger);
+    border-radius: 8px;
+    padding: 0.85rem 1.1rem;
+    margin: 0 auto 1rem auto;
+    max-width: 640px;
+}
+
+.errors p { margin: 0.2rem 0; }
+
+/* admin-actions on dashboard */
+section.admin-actions,
+section.stats {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.25rem;
+}
+
+section.admin-actions ul li,
+section.stats ul li {
+    background: transparent;
+    border: none;
+    padding: 0.25rem 0;
+    margin: 0;
+}
+
+.filter-form {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0 0 1rem 0;
+    max-width: none;
+    box-shadow: none;
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+}
+
+.filter-form select {
+    width: auto;
+    min-width: 200px;
+}
+
+.filter-form label {
+    text-transform: none;
+    letter-spacing: normal;
+    font-size: 0.95rem;
+    color: var(--text);
+    font-weight: 500;
+}
+
+.filter-clear {
+    font-size: 0.9rem;
+}
+
+section.login-prompt {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem;
+    text-align: center;
+    margin-bottom: 1.25rem;
+}
+
+section.login-prompt h2 {
+    margin-top: 0;
+    color: var(--text);
+}
+
+a.login-button {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    padding: 0.55rem 1.4rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    margin-top: 0.5rem;
+}
+
+a.login-button:hover {
+    background: var(--accent-hover);
+    color: #fff;
+    text-decoration: none;
+}

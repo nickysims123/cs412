@@ -1,0 +1,106 @@
+<!--
+File: dashboard.html
+Author: Nicholas Sima (nicksima@bu.edu)
+Description: dashboard homepage to display graphs
+-->
+
+
+{% extends 'project/base.html' %}
+
+{% block content %}
+
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+<h1>University Dashboard</h1>
+
+<section class="stats">
+    <h2>Students per Department</h2>
+
+    <form method="get" class="filter-form">
+        <label for="hometown-filter">Filter by hometown:</label>
+        <select name="hometown" id="hometown-filter" onchange="this.form.submit()">
+            <option value="">All hometowns</option>
+            {% for h in hometown_choices %}
+                <option value="{{ h }}" {% if h == selected_hometown %}selected{% endif %}>{{ h }}</option>
+            {% endfor %}
+        </select>
+        {% if selected_dept %}<input type="hidden" name="dept" value="{{ selected_dept }}">{% endif %}
+        {% if selected_program %}<input type="hidden" name="program" value="{{ selected_program }}">{% endif %}
+        {% if selected_hometown %}
+            <a href="?{% if selected_dept %}dept={{ selected_dept }}&{% endif %}{% if selected_program %}program={{ selected_program }}{% endif %}" class="filter-clear">Clear</a>
+        {% endif %}
+        <noscript><button type="submit">Apply</button></noscript>
+    </form>
+
+    {{ students_per_department_graph|safe }}
+</section>
+
+<section class="stats">
+    <h2>Dorm Occupancy</h2>
+
+    <form method="get" class="filter-form">
+        <label for="dept-filter">Filter by department:</label>
+        <select name="dept" id="dept-filter" onchange="this.form.submit()">
+            <option value="">All dorms</option>
+            <option value="__none__" {% if selected_dept == '__none__' %}selected{% endif %}>Unrestricted (no department)</option>
+            {% for d in department_choices %}
+                <option value="{{ d.pk }}" {% if selected_dept == d.pk|stringformat:"s" %}selected{% endif %}>{{ d.name }}</option>
+            {% endfor %}
+        </select>
+        {% if selected_hometown %}<input type="hidden" name="hometown" value="{{ selected_hometown }}">{% endif %}
+        {% if selected_program %}<input type="hidden" name="program" value="{{ selected_program }}">{% endif %}
+        {% if selected_dept %}
+            <a href="?{% if selected_hometown %}hometown={{ selected_hometown }}&{% endif %}{% if selected_program %}program={{ selected_program }}{% endif %}" class="filter-clear">Clear</a>
+        {% endif %}
+        <noscript><button type="submit">Apply</button></noscript>
+    </form>
+
+    {{ dorm_occupancy_graph|safe }}
+</section>
+
+<section class="stats">
+    <h2>Hatreds per Student</h2>
+
+    <form method="get" class="filter-form">
+        <label for="program-filter">Filter by program:</label>
+        <select name="program" id="program-filter" onchange="this.form.submit()">
+            <option value="">All programs</option>
+            {% for d in program_choices %}
+                <option value="{{ d.pk }}" {% if selected_program == d.pk|stringformat:"s" %}selected{% endif %}>{{ d.name }}</option>
+            {% endfor %}
+        </select>
+        {% if selected_hometown %}<input type="hidden" name="hometown" value="{{ selected_hometown }}">{% endif %}
+        {% if selected_dept %}<input type="hidden" name="dept" value="{{ selected_dept }}">{% endif %}
+        {% if selected_program %}
+            <a href="?{% if selected_hometown %}hometown={{ selected_hometown }}&{% endif %}{% if selected_dept %}dept={{ selected_dept }}{% endif %}" class="filter-clear">Clear</a>
+        {% endif %}
+        <noscript><button type="submit">Apply</button></noscript>
+    </form>
+
+    {{ hatreds_per_student_graph|safe }}
+</section>
+
+{% if is_admin %}
+    <section class="admin-actions">
+        <h2>Admin Actions</h2>
+        <p>Welcome, {{ user.username }}. Use the links below to add new records.</p>
+        <ul>
+            <li><a href="{% url 'create_student' %}">Add Student</a></li>
+            <li><a href="{% url 'create_professor' %}">Add Professor</a></li>
+            <li><a href="{% url 'create_dorm' %}">Add Dorm</a></li>
+            <li><a href="{% url 'create_department' %}">Add Department</a></li>
+        </ul>
+    </section>
+{% elif user.is_authenticated %}
+    <section class="admin-actions">
+        <p>You are logged in, but only administrators may edit records.</p>
+    </section>
+{% else %}
+    <section class="login-prompt">
+        <h2>Please log in</h2>
+        <p>Sign in to browse students, professors, dorms, and departments, or to manage university records.</p>
+        <p><a class="login-button" href="{% url 'login' %}">Log in</a></p>
+    </section>
+{% endif %}
+
+{% endblock %}

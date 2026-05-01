@@ -1,0 +1,25 @@
+<!--
+File: update_professor_form.html
+Author: Nicholas Sima (nicksima@bu.edu)
+Description: page to display a form for updating an existing professor (with image upload)
+-->
+
+
+{% extends 'project/base.html' %}
+
+{% block content %}
+
+<h1>Edit Professor: {{ professor.title }} {{ professor.surname }}</h1>
+
+<form action="{% url 'update_professor' professor.pk %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <br>
+
+    <input type="submit" value="Save Changes">
+    <a href="{% url 'show_all_professors' %}">Cancel</a>
+</form>
+
+{% endblock %}

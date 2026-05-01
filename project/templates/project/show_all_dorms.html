@@ -1,0 +1,50 @@
+<!--
+File: show_all_dorms.html
+Author: Nicholas Sima (nicksima@bu.edu)
+Description: page to display all dorms
+-->
+
+{% extends 'project/base.html' %}
+
+{% block content %}
+
+<div class="list-header">
+    <h1>All Dorms</h1>
+    {% if is_admin %}
+        <a class="add-button" href="{% url 'create_dorm' %}">+ Add Dorm</a>
+    {% endif %}
+</div>
+
+<ul class="entity-list">
+    {% for dorm in dorms %}
+    <li>
+        {% if dorm.image_url %}
+            <img class="thumb" src="{{ dorm.image_url }}" alt="{{ dorm.name }}">
+        {% else %}
+            <div class="thumb-placeholder">{{ dorm.name|slice:":1" }}</div>
+        {% endif %}
+        <div class="body">
+            <span class="title">{{ dorm.name }}</span>
+            <div class="meta">
+                <span>{{ dorm.address }}</span>
+                <span>{{ dorm.current_size|floatformat:0 }} / {{ dorm.capacity|floatformat:0 }} residents</span>
+                {% if dorm.resident_assistant %}
+                    <span>RA: {{ dorm.resident_assistant }}</span>
+                {% endif %}
+                {% if dorm.department %}
+                    <span>Dept: {{ dorm.department.name }}</span>
+                {% endif %}
+            </div>
+        </div>
+        {% if is_admin %}
+        <div class="actions">
+            <a class="edit-link" href="{% url 'update_dorm' dorm.pk %}">Edit</a>
+        </div>
+        {% endif %}
+    </li>
+    {% empty %}
+    <li class="empty">No dorms on campus.</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

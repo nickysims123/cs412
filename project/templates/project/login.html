@@ -1,0 +1,24 @@
+<!--
+File: login.html
+Author: Nicholas Sima (nicksima@bu.edu)
+Description: page to display a login form for admins
+-->
+
+{% extends 'project/base.html' %}
+
+{% block content %}
+
+<h1>Admin Login</h1>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Log in</button>
+    <input type="hidden" name="next" value="{{ next }}">
+</form>
+
+{% if form.errors %}
+    <p>Invalid username or password.</p>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,25 @@
+<!--
+File: create_professor_form.html
+Author: Nicholas Sima (nicksima@bu.edu)
+Description: page to display a form for creating a professor (with image upload)
+-->
+
+
+{% extends 'project/base.html' %}
+
+{% block content %}
+
+<h1>Add Professor</h1>
+
+<form action="{% url 'create_professor' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <br>
+
+    <input type="submit" value="Create Professor">
+    <a href="{% url 'show_all_professors' %}">Cancel</a>
+</form>
+
+{% endblock %}

@@ -1,0 +1,40 @@
+<!--
+File: show_all_departments.html
+Author: Nicholas Sima (nicksima@bu.edu)
+Description: page to display all departments
+-->
+
+{% extends 'project/base.html' %}
+
+{% block content %}
+
+<div class="list-header">
+    <h1>All Departments</h1>
+    {% if is_admin %}
+        <a class="add-button" href="{% url 'create_department' %}">+ Add Department</a>
+    {% endif %}
+</div>
+
+<ul class="entity-list">
+    {% for department in departments %}
+    <li>
+        <div class="thumb-placeholder">{{ department.name|slice:":1" }}</div>
+        <div class="body">
+            <span class="title">{{ department.name }}</span>
+            <div class="meta">
+                <span>Staff: {{ department.staff }}</span>
+                <span>{{ department.students|floatformat:0 }} / {{ department.capacity|floatformat:0 }} students</span>
+            </div>
+        </div>
+        {% if is_admin %}
+        <div class="actions">
+            <a class="edit-link" href="{% url 'update_department' department.pk %}">Edit</a>
+        </div>
+        {% endif %}
+    </li>
+    {% empty %}
+    <li class="empty">No departments offered.</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

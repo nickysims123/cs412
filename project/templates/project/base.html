@@ -1,0 +1,47 @@
+<!--
+File: base.html
+Author: Nicholas Sima (nicksima@bu.edu)
+Description: page to create a base layout for all pages
+-->
+
+
+{% load static %}
+<html>
+    <head>
+        <title>University Tracker</title>
+        <link rel="stylesheet" href="{% static 'styles-project.css' %}">
+    </head>
+    <body>
+        <header>
+            <h1><a href="{% url 'dashboard' %}">University Tracker</a></h1>
+            <nav>
+                <ul>
+                    <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'show_all_students' %}">Students</a></li>
+                        <li><a href="{% url 'show_all_professors' %}">Professors</a></li>
+                        <li><a href="{% url 'show_all_dorms' %}">Dorms</a></li>
+                        <li><a href="{% url 'show_all_departments' %}">Departments</a></li>
+                        <li><a href="{% url 'show_all_hatreds' %}">Hatreds</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+            <div class="auth">
+                {% if user.is_authenticated %}
+                    <span>Logged in as {{ user.username }}</span>
+                    <form method="post" action="{% url 'logout' %}" class="auth-form">
+                        {% csrf_token %}
+                        <button type="submit">Logout</button>
+                    </form>
+                {% else %}
+                    <a href="{% url 'login' %}"><button type="button">Admin Login</button></a>
+                {% endif %}
+            </div>
+        </header>
+
+        <main>
+            {% block content %}
+            {% endblock %}
+        </main>
+    </body>
+</html>

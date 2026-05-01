@@ -1,0 +1,64 @@
+<!--
+File: create_student_form.html
+Author: Nicholas Sima (nicksima@bu.edu)
+Description: page to display a form for creating a student
+-->
+
+
+{% extends 'project/base.html' %}
+
+{% block content %}
+
+<h1>Add Student</h1>
+
+{% if form.non_field_errors %}
+    <div class="errors">
+        {% for error in form.non_field_errors %}
+            <p>{{ error }}</p>
+        {% endfor %}
+    </div>
+{% endif %}
+
+<form action="{% url 'create_student' %}" method="post">
+    {% csrf_token %}
+
+    <p><label for="id_first_name">First name:</label> {{ form.first_name }}</p>
+    <p><label for="id_last_name">Last name:</label> {{ form.last_name }}</p>
+    <p><label for="id_hometown">Hometown:</label> {{ form.hometown }}</p>
+    <p><label for="id_course_program">Course program:</label> {{ form.course_program }}</p>
+    <p><label for="id_lives_in">Lives in:</label> {{ form.lives_in }}</p>
+
+    <fieldset>
+        <legend>Hates</legend>
+        <input type="text" id="hatred-search" placeholder="Search students..." autocomplete="off">
+        <div id="hatred-list">
+            {{ form.hated_students }}
+        </div>
+    </fieldset>
+
+    <br>
+
+    <input type="submit" value="Create Student">
+    <a href="{% url 'show_all_students' %}">Cancel</a>
+</form>
+
+<!--
+javascript search function to allow users to search for specific students!
+I found this easier than django's
+-->
+<script>
+(function () {
+    const search = document.getElementById('hatred-search');
+    const list = document.getElementById('hatred-list');
+    if (!search || !list) return;
+    search.addEventListener('input', function () {
+        const q = search.value.trim().toLowerCase();
+        list.querySelectorAll('label').forEach(function (label) {
+            const text = label.textContent.toLowerCase();
+            label.style.display = (q === '' || text.includes(q)) ? '' : 'none';
+        });
+    });
+})();
+</script>
+
+{% endblock %}

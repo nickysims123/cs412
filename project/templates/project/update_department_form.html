@@ -1,0 +1,25 @@
+<!--
+File: update_department_form.html
+Author: Nicholas Sima (nicksima@bu.edu)
+Description: page to display a form for updating an existing department
+-->
+
+
+{% extends 'project/base.html' %}
+
+{% block content %}
+
+<h1>Edit Department: {{ department.name }}</h1>
+
+<form action="{% url 'update_department' department.pk %}" method="post">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <br>
+
+    <input type="submit" value="Save Changes">
+    <a href="{% url 'show_all_departments' %}">Cancel</a>
+</form>
+
+{% endblock %}

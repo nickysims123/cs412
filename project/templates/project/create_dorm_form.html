@@ -1,0 +1,25 @@
+<!--
+File: create_dorm_form.html
+Author: Nicholas Sima (nicksima@bu.edu)
+Description: page to display a form for creating a dorm
+-->
+
+
+{% extends 'project/base.html' %}
+
+{% block content %}
+
+<h1>Add Dorm</h1>
+
+<form action="{% url 'create_dorm' %}" method="post">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <br>
+
+    <input type="submit" value="Create Dorm">
+    <a href="{% url 'show_all_dorms' %}">Cancel</a>
+</form>
+
+{% endblock %}

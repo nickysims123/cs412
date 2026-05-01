@@ -1,0 +1,46 @@
+<!--
+File: show_all_students.html
+Author: Nicholas Sima (nicksima@bu.edu)
+Description: page to display all students
+-->
+
+
+{% extends 'project/base.html' %}
+
+{% block content %}
+
+<div class="list-header">
+    <h1>All Students</h1>
+    {% if is_admin %}
+        <a class="add-button" href="{% url 'create_student' %}">+ Add Student</a>
+    {% endif %}
+</div>
+
+<ul class="entity-list">
+    {% for student in students %}
+    <li>
+        <div class="thumb-placeholder">{{ student.first_name|slice:":1" }}{{ student.last_name|slice:":1" }}</div>
+        <div class="body">
+            <span class="title">{{ student.first_name }} {{ student.last_name }}</span>
+            <div class="meta">
+                <span>Hometown: {{ student.hometown }}</span>
+                {% if student.course_program %}
+                    <span>Program: {{ student.course_program.name }}</span>
+                {% endif %}
+                {% if student.lives_in %}
+                    <span>Dorm: {{ student.lives_in.name }}</span>
+                {% endif %}
+            </div>
+        </div>
+        {% if is_admin %}
+        <div class="actions">
+            <a class="edit-link" href="{% url 'update_student' student.pk %}">Edit</a>
+        </div>
+        {% endif %}
+    </li>
+    {% empty %}
+    <li class="empty">No students enrolled.</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

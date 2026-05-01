@@ -1,0 +1,40 @@
+<!--
+File: show_all_professors.html
+Author: Nicholas Sima (nicksima@bu.edu)
+Description: page to display all professors
+-->
+
+{% extends 'project/base.html' %}
+
+{% block content %}
+
+<div class="list-header">
+    <h1>All Professors</h1>
+    {% if is_admin %}
+        <a class="add-button" href="{% url 'create_professor' %}">+ Add Professor</a>
+    {% endif %}
+</div>
+
+<ul class="entity-list">
+    {% for professor in professors %}
+    <li>
+        {% if professor.image_file %}
+            <img class="thumb" src="{{ professor.image_file.url }}" alt="{{ professor.surname }}">
+        {% else %}
+            <div class="thumb-placeholder">{{ professor.surname|slice:":1" }}</div>
+        {% endif %}
+        <div class="body">
+            <span class="title">{{ professor.title }} {{ professor.surname }}</span>
+        </div>
+        {% if is_admin %}
+        <div class="actions">
+            <a class="edit-link" href="{% url 'update_professor' professor.pk %}">Edit</a>
+        </div>
+        {% endif %}
+    </li>
+    {% empty %}
+    <li class="empty">No professors on staff.</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

@@ -1,0 +1,39 @@
+<!--
+File: show_all_hatreds.html
+Author: Nicholas Sima (nicksima@bu.edu)
+Description: page to display a student hatreds
+-->
+
+{% extends 'project/base.html' %}
+
+{% block content %}
+
+<div class="list-header">
+    <h1>All Hatreds</h1>
+</div>
+
+{% if is_admin %}
+    <p>Hatreds are managed from the <a href="{% url 'show_all_students' %}">student edit page</a>.</p>
+{% endif %}
+
+<ul class="entity-list">
+    {% for hatred in hatreds %}
+    <li>
+        <div class="thumb-placeholder">!</div>
+        <div class="body">
+            <span class="title">
+                {{ hatred.first_student.first_name }} {{ hatred.first_student.last_name }}
+                &nbsp;&times;&nbsp;
+                {{ hatred.second_student.first_name }} {{ hatred.second_student.last_name }}
+            </span>
+            <div class="meta">
+                <span>Cannot share a dorm</span>
+            </div>
+        </div>
+    </li>
+    {% empty %}
+    <li class="empty">No hatreds recorded.</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
